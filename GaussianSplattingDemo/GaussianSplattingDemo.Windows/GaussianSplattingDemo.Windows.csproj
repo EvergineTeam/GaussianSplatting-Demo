@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Evergine.DirectX11" Version="2025.2.19.187-nightly" />
+    <PackageReference Include="Evergine.HLSLEverywhere" Version="2025.2.19.187-nightly" />
+    <PackageReference Include="Evergine.XAudio2" Version="2025.2.19.187-nightly" />
+    <PackageReference Include="Evergine.Forms" Version="2025.2.19.187-nightly" />
+    <PackageReference Include="Evergine.Targets" Version="2025.2.19.187-nightly" />
+    <PackageReference Include="Evergine.Targets.Windows" Version="2025.2.19.187-nightly" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GaussianSplattingDemo\GaussianSplattingDemo.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition="$(DefineConstants.Contains('EVERGINE_EDITOR'))">
+    <ProjectReference Include="..\GaussianSplattingDemo.Editor\GaussianSplattingDemo.Editor.csproj" />
+  </ItemGroup>
+</Project>
