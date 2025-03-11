@@ -27,14 +27,14 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Evergine.Framework" Version="2025.2.19.187-nightly" />
-    <PackageReference Include="Evergine.HLSLEverywhere" Version="2025.2.19.187-nightly" />
+    <PackageReference Include="Evergine.Framework" Version="2025.3.11.551-nightly" />
+    <PackageReference Include="Evergine.HLSLEverywhere" Version="2025.3.11.551-nightly" />
     <PackageReference Include="Evergine.LibBulletc.Natives.Wasm" Version="2023.11.28.20" />
-    <PackageReference Include="Evergine.OpenGL" Version="2025.2.19.187-nightly" />
+    <PackageReference Include="Evergine.OpenGL" Version="2025.3.11.551-nightly" />
     <PackageReference Include="Evergine.Serialization.Converters" Version="2025.2.19.187-nightly" />
-    <PackageReference Include="Evergine.Targets" Version="2025.2.19.187-nightly" />
-    <PackageReference Include="Evergine.Targets.Web" Version="2025.2.19.187-nightly" />
-    <PackageReference Include="Evergine.Web" Version="2025.2.19.187-nightly" />
+    <PackageReference Include="Evergine.Targets" Version="2025.3.11.551-nightly" />
+    <PackageReference Include="Evergine.Targets.Web" Version="2025.3.11.551-nightly" />
+    <PackageReference Include="Evergine.Web" Version="2025.3.11.551-nightly" />
     <PackageReference Include="Evergine.GaussianSplatting.Web" Version="2025.2.19.10-nightly" />
   </ItemGroup>
   <ItemGroup>
