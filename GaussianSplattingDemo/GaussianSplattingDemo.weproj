@@ -1,10 +1,10 @@
 Packages:
   - Id: Evergine.Core
     LocalPath: null
-    Version: 2025.3.11.551-nightly
+    Version: 2025.3.18.7
   - Id: Evergine.GaussianSplatting
     LocalPath: null
-    Version: 2025.2.24.12-nightly
+    Version: 2025.3.17.1-preview
 Parameters:
   MaxSkinningWeights: 4
   SparseMorphTargets: false
