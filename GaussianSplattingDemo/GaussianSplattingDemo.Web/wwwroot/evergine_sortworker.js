@@ -28,6 +28,13 @@ onmessage = async function (e) {
         await startPromise;
         let params = e.data.slice(2);
         if (cmd == 'init') {
+            
+            if (gsplatSorter != undefined) {
+                Module._DestroySorter(gsplatSorter);
+                gsplatSorter = undefined;
+                Module._free(orderPtr);
+            }
+
             // Parameters: splat centers array
             let splatCenters = params[0]; // ArrayBuffer of splat centers
             let centersLength = params[1]; // length of centers

@@ -30,6 +30,7 @@ namespace GaussianSplattingDemo.Web
             var cp = new global::Evergine.Components.Graphics3D.Spinner();
 
             // Wasm instance need to be initialized here for debugger
+            global::Evergine.Web.WebAssembly.HostConfiguration = new HostConfiguration();
             wasm = global::Evergine.Web.WebAssembly.GetInstance();
         }
 
@@ -54,10 +55,6 @@ namespace GaussianSplattingDemo.Web
             var surface = (WebSurface)windowsSystem.CreateSurface(canvas);
             appCanvas[canvasId] = surface;
             ConfigureGraphicsContext(application, surface, canvasId);
-
-            // Audio is currently unsupported
-            //var xaudio = new Evergine.XAudio2.XAudioDevice();
-            //application.Container.RegisterInstance(xaudio);
 
             Stopwatch clockTimer = Stopwatch.StartNew();
             windowsSystem.Run(
@@ -94,7 +91,7 @@ namespace GaussianSplattingDemo.Web
 
         private static void ConfigureGraphicsContext(Application application, Surface surface, string canvasId)
         {
-			// Enabled web canvas antialias (MSAA)
+			// Configure webgl context
             wasm.Invoke("window._evergine_EGL", false, "webgl2", canvasId);
 
             GraphicsContext graphicsContext = new GLGraphicsContext(GraphicsBackend.WebGL2);
@@ -121,6 +118,18 @@ namespace GaussianSplattingDemo.Web
             graphicsPresenter.AddDisplay("DefaultDisplay", firstDisplay);
 
             application.Container.RegisterInstance(graphicsContext);
+        }
+
+        private class HostConfiguration : IWasmHostConfiguration
+        {
+            public void ConfigureHost(WebAssemblyHostBuilder builder)
+            {
+            }
+
+            public void RegisterJsonConverters(IList<JsonConverter> converters)
+            {
+                converters.AddEvergineConverters();
+            }
         }
     }
 }

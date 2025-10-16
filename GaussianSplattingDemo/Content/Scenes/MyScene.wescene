@@ -146,10 +146,10 @@ Items:
         ShadowDistance: 80.0
         ShadowOpacity: 1.0
         SplitDistance:
-          - 0.0
-          - 0.0
-          - 0.0
-          - 0.0
+          - 8.375
+          - 17.625
+          - 41.25
+          - 140.75
         Temperature: 6500.0
       - !Evergine.Framework.Graphics.SunComponent,Evergine.Framework
         Id: 6f2b70f3-a505-49a6-9454-130b04d48cd3
@@ -218,39 +218,38 @@ Items:
         UpdateOrder: 0.5
     Children: []
     Id: 6a094fea-e84d-4cbc-bb6e-60ccc60b5693
-  - !Evergine.Framework.Assets.AssetSources.Entities.EntityItemModel,Evergine.Framework
-    Name: GaussianSplatting
-    Tag: null
-    IsEnabled: true
-    IsStatic: false
-    Components:
-      - !Evergine.Framework.Graphics.Transform3D,Evergine.Framework
-        Id: 0cb998b0-90d7-4bb3-87a3-7dfb2f57d49e
-        IsEnabled: true
-        LocalOrientation:
-          W: 1.0
+  - !Evergine.Framework.Assets.AssetSources.Entities.PrefabInstanceModel,Evergine.Framework
+    EntityLinks: {}
+    Id: 3719efd6-1f13-4089-b404-f6544217b973
+    IdDictionary:
+      52c2c443-06b4-4f4d-92b6-268725c0a7fc: 3719efd6-1f13-4089-b404-f6544217b973
+      7dff79b9-b830-480f-bb4a-cf4a4ecadb43: 546b3c0d-7c42-48a1-9b73-d00e979fbaaa
+      990b5ab5-3d45-4e23-a234-8cf7d337ce71: 5b2e4315-045a-4b7d-b967-963d05395f12
+      df6599d8-23b3-4a02-a37a-b7fe6cc99328: 5486ab06-8ea6-441d-9041-185b1d4dd6d2
+      e7fda387-885a-4bb2-8126-3bf36e7c586f: 18f7387b-2d4c-4ea3-9942-ad79e9566e0c
+    Modifications:
+      - !Evergine.Framework.Assets.AssetSources.Entities.PrefabModification%601[[System.String,System.Private.CoreLib]],Evergine.Framework
+        Name: Name
+        Target: 52c2c443-06b4-4f4d-92b6-268725c0a7fc
+        TypedValue: GSplatPrefab_weprefab
+      - !Evergine.Framework.Assets.AssetSources.Entities.PrefabModification%601[[Evergine.Mathematics.Vector3,Evergine.Mathematics]],Evergine.Framework
+        Name: LocalPosition
+        Target: 990b5ab5-3d45-4e23-a234-8cf7d337ce71
+        TypedValue:
           X: 0.0
           Y: 0.0
           Z: 0.0
-        LocalPosition:
-          X: 0.0
-          Y: 0.0
-          Z: 0.0
-        LocalScale:
-          X: 1.0
-          Y: 1.0
-          Z: 1.0
-      - !Evergine.GaussianSplatting.GaussianSplattingDrawable,Evergine.GaussianSplatting
-        Id: 7915c076-e3fa-4b93-8892-0dad7bfce5d8
-        DebugBoundingbox: true
-        IsCullingEnabled: true
-        IsEnabled: true
-        Layer: 5087b5c3-0b94-4c68-b33d-1bcf5064b8c2
-        OrderBias: 0
-        RenderFlags: CastShadows
-        SplatPath: RentaSevilla.compressed.ply
-    Children: []
-    Id: 451b32f5-e0f4-47d5-9c8c-10f6cca1efe1
+      - !Evergine.Framework.Assets.AssetSources.Entities.PrefabModification%601[[System.String,System.Private.CoreLib]],Evergine.Framework
+        Name: SplatPath
+        Target: 7dff79b9-b830-480f-bb4a-cf4a4ecadb43
+        TypedValue: RentaSevilla.compressed.ply
+      - !Evergine.Framework.Assets.AssetSources.Entities.PrefabModification%601[[Evergine.Common.Graphics.RenderLayerDescription,Evergine.Common]],Evergine.Framework
+        Name: Layer
+        Target: e7fda387-885a-4bb2-8126-3bf36e7c586f
+        TypedValue: 5087b5c3-0b94-4c68-b33d-1bcf5064b8c2
+    RemovedComponents: []
+    RemovedEntities: []
+    Source: 5e62a532-6b6a-4c75-8069-588bf980627d
 Managers:
   - !Evergine.Framework.Managers.AssetSceneManager,Evergine.Framework
     Id: 4ae9964a-5a8a-463f-b714-050389b3b68c
