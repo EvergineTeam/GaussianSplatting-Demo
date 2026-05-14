@@ -19,6 +19,9 @@ namespace GaussianSplattingDemo
 
         protected override void CreateScene()
         {
+            var rp = this.Managers.RenderManager.RenderPipeline.DefaultRenderPath as ForwardRenderPath;
+            rp.ZPrePassIsEnabled = false;
+            rp.GBufferPassIsEnabled = false;
         }
     }
 }
