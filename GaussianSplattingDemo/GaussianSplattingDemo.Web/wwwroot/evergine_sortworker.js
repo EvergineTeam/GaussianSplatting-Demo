@@ -28,7 +28,7 @@ onmessage = async function (e) {
         await startPromise;
         let params = e.data.slice(2);
         if (cmd == 'init') {
-            
+
             if (gsplatSorter != undefined) {
                 Module._DestroySorter(gsplatSorter);
                 gsplatSorter = undefined;

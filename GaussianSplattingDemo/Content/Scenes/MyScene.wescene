@@ -15,9 +15,9 @@ Items:
           Y: 0.17893067
           Z: 0.0178222861
         LocalPosition:
-          X: 0.590905905
-          Y: 1.35285151
-          Z: 7.04414731E-08
+          X: 0.0
+          Y: 0.0
+          Z: 0.0
         LocalScale:
           X: 1.0
           Y: 1.0
@@ -25,10 +25,10 @@ Items:
       - !GaussianSplattingDemo.OrbitBehavior,GaussianSplattingDemo
         Id: 3e48275c-6167-4d7e-8d58-e21c4734a53f
         IsEnabled: true
-        MaxElevationAngle: 0.261799395
-        MaxZoom: 0.100000001
-        MinElevationAngle: -0.17453292
-        MinZoom: 10.0
+        MaxElevationAngle: 1.21981251
+        MaxZoom: 0.200000003
+        MinElevationAngle: 0.149120182
+        MinZoom: 5.0
         OrbitMouseFactor: 0.00249999994
         OrbitSmooth: 50.0
         TouchZoomFactor: 1.5
@@ -77,19 +77,21 @@ Items:
             FieldOfViewAxis: Vertical
             FocalDistance: 1.0
             FocalLength: 50.0
-            FrameBuffer: null
+            FrameBuffer: 00000000-0000-0000-0000-000000000000
             FrustumCullingEnabled: true
             HDREnabled: true
             IsEnabled: true
             LayerMaskDefaultValue: true
             LinearBackgroundColor:
               A: 1.0
-              B: 0.139022455
-              G: 0.139022455
-              R: 0.139022455
+              B: 0.632042646
+              G: 0.523443162
+              R: 0.453456491
             LogLuminanceRange: 12.0
             MinLogLuminance: -10.0
             NearPlane: 0.100000001
+            OrthographicSize: 5.0
+            ProjectionType: Perspective
             Sensitivity: 100.0
             SensorSize:
               X: 36.0
@@ -97,6 +99,7 @@ Items:
             ShutterSpeed: 1.20000005
             TAU: 1.10000002
             TagFilter: null
+            UseCustomClearDepth: false
             UsePhysicalParameters: false
         Children: []
         Id: 9841b6b3-9c09-4b60-b442-a5c63257ee02
@@ -145,11 +148,6 @@ Items:
         ShadowBias: 0.00499999989
         ShadowDistance: 80.0
         ShadowOpacity: 1.0
-        SplitDistance:
-          - 8.375
-          - 17.625
-          - 41.25
-          - 140.75
         Temperature: 6500.0
       - !Evergine.Framework.Graphics.SunComponent,Evergine.Framework
         Id: 6f2b70f3-a505-49a6-9454-130b04d48cd3
@@ -224,6 +222,7 @@ Items:
     IdDictionary:
       52c2c443-06b4-4f4d-92b6-268725c0a7fc: 3719efd6-1f13-4089-b404-f6544217b973
       7dff79b9-b830-480f-bb4a-cf4a4ecadb43: 546b3c0d-7c42-48a1-9b73-d00e979fbaaa
+      8f0baa37-1b06-4955-9708-618a7e9f970e: dce7d6ca-1a99-4960-8811-239e922ffd7a
       990b5ab5-3d45-4e23-a234-8cf7d337ce71: 5b2e4315-045a-4b7d-b967-963d05395f12
       df6599d8-23b3-4a02-a37a-b7fe6cc99328: 5486ab06-8ea6-441d-9041-185b1d4dd6d2
       e7fda387-885a-4bb2-8126-3bf36e7c586f: 18f7387b-2d4c-4ea3-9942-ad79e9566e0c
@@ -242,11 +241,7 @@ Items:
       - !Evergine.Framework.Assets.AssetSources.Entities.PrefabModification%601[[System.String,System.Private.CoreLib]],Evergine.Framework
         Name: SplatPath
         Target: 7dff79b9-b830-480f-bb4a-cf4a4ecadb43
-        TypedValue: RentaSevilla.compressed.ply
-      - !Evergine.Framework.Assets.AssetSources.Entities.PrefabModification%601[[Evergine.Common.Graphics.RenderLayerDescription,Evergine.Common]],Evergine.Framework
-        Name: Layer
-        Target: e7fda387-885a-4bb2-8126-3bf36e7c586f
-        TypedValue: 5087b5c3-0b94-4c68-b33d-1bcf5064b8c2
+        TypedValue: CarmonaRomanBridge.sog
     RemovedComponents: []
     RemovedEntities: []
     Source: 5e62a532-6b6a-4c75-8069-588bf980627d

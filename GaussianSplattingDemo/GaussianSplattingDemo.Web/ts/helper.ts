@@ -85,7 +85,7 @@ function _evergine_getPointSummary(src, event) {
 function _evergine_getTouchSummary(src, event) {
     event.preventDefault();
     let changed = event.changedTouches;
-    let summ = [];
+    let summ: string[] = [];
     for (let i = 0; i < changed.length; i++) {
         let touch = changed[i];
         summ.push(touch.identifier + "," + _evergine_getPointSummary(src, touch));

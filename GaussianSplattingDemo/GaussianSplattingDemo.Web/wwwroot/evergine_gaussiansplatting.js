@@ -24,20 +24,27 @@ async function runWorkerCommand(cmd, ...paramters) {
 }
 
 async function workerInit(centersBytes, centersSize, arraySize) {
-    let splatCenters = Blazor.platform.toUint8Array(centersBytes).buffer;
+    let splatCenters = (centersBytes instanceof Uint8Array ? centersBytes : new Uint8Array(centersBytes)).buffer;
     let sortResult = new SharedArrayBuffer(arraySize * Uint32Array.BYTES_PER_ELEMENT);
     let initPromise = runWorkerCommand('init', splatCenters, centersSize, sortResult);
     window.workerSort = async function workerSort(cameraPosition, cameraDirection) {
         await initPromise;
+
         result = await runWorkerCommand('sort', cameraPosition, cameraDirection);
+
         window.workerSortResult = function workerSortResult() {
-            var handle = BINDING.js_typed_array_to_array(result);
-            return handle;
+            if (!result) {
+                return new Uint8Array(0);
+            }
+
+            return result instanceof Uint8Array
+                ? result
+                : new Uint8Array(result.buffer, result.byteOffset, result.byteLength);
         }
     }
 
     window.workerDispose = async function workerDispose() {
         await initPromise;
-        let result = await runWorkerCommand('dispose');
+        await runWorkerCommand('dispose');
     }
 }

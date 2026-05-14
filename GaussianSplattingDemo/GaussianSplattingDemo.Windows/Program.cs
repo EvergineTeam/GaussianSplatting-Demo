@@ -93,6 +93,7 @@ namespace GaussianSplattingDemo.Windows
             };
             var swapChain = graphicsContext.CreateSwapChain(swapChainDescription);
             swapChain.VerticalSync = VSync;
+            swapChain.FrameBuffer.IntermediateBufferAssociated = false;
 
             var graphicsPresenter = application.Container.Resolve<GraphicsPresenter>();
             var firstDisplay = new Display(window, swapChain);
