@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
   </PropertyGroup>
-
   <PropertyGroup>
     <PublishTrimmed Condition="'$(Configuration)' == 'Debug'">false</PublishTrimmed>
     <PublishTrimmed Condition="'$(Configuration)' == 'Release'">true</PublishTrimmed>
@@ -11,18 +9,15 @@
     <!-- <RunAOTCompilation>true</RunAOTCompilation> -->
     <!-- <AOTMode>LLVMOnly</AOTMode> -->
   </PropertyGroup>
-
   <ItemGroup>
     <TrimmerRootDescriptor Include="link-descriptor.xml" />
   </ItemGroup>
-
   <PropertyGroup>
     <DefineConstants>WASM</DefineConstants>
     <GenerateEvergineContent>False</GenerateEvergineContent>
     <GenerateEvergineAssets>True</GenerateEvergineAssets>
     <WasmAllowUndefinedSymbols>True</WasmAllowUndefinedSymbols>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="10.0.5" PrivateAssets="all" />
@@ -31,19 +26,17 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
-
   <ItemGroup>
-	<PackageReference Include="Evergine.GaussianSplatting.Web" Version="2026.5.14.123-nightly" />
-    <PackageReference Include="Evergine.Framework" Version="2026.5.14.713-nightly" />
-    <PackageReference Include="Evergine.HLSLEverywhere" Version="2026.5.14.713-nightly" />
+    <PackageReference Include="Evergine.GaussianSplatting.Web" Version="2026.5.25.4-preview" />
+    <PackageReference Include="Evergine.Framework" Version="2026.5.26.8" />
+    <PackageReference Include="Evergine.HLSLEverywhere" Version="2026.5.26.8" />
     <PackageReference Include="Evergine.LibBulletc.Natives.Wasm" Version="2025.4.28.22" />
-    <PackageReference Include="Evergine.WebGPU" Version="2026.5.14.713-nightly" />
-    <PackageReference Include="Evergine.Serialization.Converters" Version="2026.5.14.713-nightly" />
-    <PackageReference Include="Evergine.Targets" Version="2026.5.14.713-nightly" />
-    <PackageReference Include="Evergine.Targets.Web" Version="2026.5.14.713-nightly" />
-    <PackageReference Include="Evergine.Web" Version="2026.5.14.713-nightly" />
+    <PackageReference Include="Evergine.WebGPU" Version="2026.5.26.8" />
+    <PackageReference Include="Evergine.Serialization.Converters" Version="2026.5.26.8" />
+    <PackageReference Include="Evergine.Targets" Version="2026.5.26.8" />
+    <PackageReference Include="Evergine.Targets.Web" Version="2026.5.26.8" />
+    <PackageReference Include="Evergine.Web" Version="2026.5.26.8" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\GaussianSplattingDemo\GaussianSplattingDemo.csproj" />
   </ItemGroup>
