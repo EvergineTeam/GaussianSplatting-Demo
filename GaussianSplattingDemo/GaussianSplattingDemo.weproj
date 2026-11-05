@@ -1,7 +1,7 @@
 Packages:
   - Id: Evergine.Core
     LocalPath: null
-    Version: 2026.11.4.444-nightly
+    Version: 2026.11.5.670-nightly
   - Id: Evergine.GaussianSplatting
     LocalPath: null
     Version: 2026.5.25.4-preview
