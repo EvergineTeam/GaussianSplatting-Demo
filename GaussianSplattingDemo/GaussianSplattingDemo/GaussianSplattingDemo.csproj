@@ -12,6 +12,6 @@
     <PackageReference Include="Evergine.Mathematics" Version="2026.11.5.670-nightly" />
     <PackageReference Include="Evergine.Targets" Version="2026.11.5.670-nightly" />
     <PackageReference Include="Evergine.CodeScenes" Version="2026.11.5.670-nightly" />
-    <PackageReference Include="Evergine.GaussianSplatting" Version="2026.5.25.4-preview" />
+    <PackageReference Include="Evergine.GaussianSplatting" Version="2026.9.29.336-nightly" />
   </ItemGroup>
 </Project>

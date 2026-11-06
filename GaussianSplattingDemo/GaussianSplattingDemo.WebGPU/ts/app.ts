@@ -5,6 +5,17 @@ class App {
   module: EvergineModule;
   static requestAnimationFrameCallback: ((d: any) => void) | undefined;
 
+  // --- GPU frame pacing (WebGPU) ---
+  // requestAnimationFrame fires at display rate whether or not the GPU is keeping up, so
+  // submitting on every tick lets the GPU queue grow: the loop then counts frames that are
+  // never presented (inflated fps plus input lag). Bounding the frames in flight keeps the
+  // queue short, the reported rate honest and the view responsive.
+  // Set to 0 to opt out and submit on every tick, as before.
+  static maxFramesInFlight = 2;
+  static readonly pacingTimeoutMs = 1000;
+  static framesInFlight = 0;
+  private static pacingListenerAttached = false;
+
   constructor(assemblyName: string, className: string, module: EvergineModule) {
     this.program = new Program(assemblyName, className);
     this.module = module;
@@ -49,6 +60,8 @@ class App {
     this.updateCanvasSize();
     window.addEventListener("resize", this.resizeAppSize.bind(this));
 
+    App.setupFramePacing();
+
     this.waitAndRun();
   }
 
@@ -71,6 +84,67 @@ class App {
   resizeAppSize() {
     this.updateCanvasSize();
     this.program.UpdateCanvasSize(this.canvasId);
+  }
+
+  // Reuses the device published by index.html before starting Evergine.
+  private static getGpuDevice(): any {
+    const blazor = (globalThis as any).Blazor;
+    return (
+      blazor?.runtime?.Module?.preinitializedWebGPUDevice ??
+      (globalThis as any).Module?.preinitializedWebGPUDevice
+    );
+  }
+
+  private static setupFramePacing() {
+    if (App.pacingListenerAttached) {
+      return;
+    }
+
+    App.pacingListenerAttached = true;
+
+    // While the tab is hidden onSubmittedWorkDone() may never resolve, so the counter is
+    // reset on the way back to avoid a permanently stalled loop.
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) {
+        App.framesInFlight = 0;
+      }
+    });
+  }
+
+  static shouldSkipFrameForPacing(): boolean {
+    return (
+      App.maxFramesInFlight > 0 &&
+      !!App.getGpuDevice() &&
+      App.framesInFlight >= App.maxFramesInFlight
+    );
+  }
+
+  static markFrameSubmitted() {
+    if (App.maxFramesInFlight <= 0) {
+      return;
+    }
+
+    let device = App.getGpuDevice();
+    if (!device?.queue?.onSubmittedWorkDone) {
+      return;
+    }
+
+    App.framesInFlight++;
+
+    // Release the slot exactly once, whether the GPU reports completion, reports an error,
+    // or never answers at all.
+    let released = false;
+    let release = () => {
+      if (released) {
+        return;
+      }
+
+      released = true;
+      App.framesInFlight = Math.max(0, App.framesInFlight - 1);
+    };
+
+    device.queue.onSubmittedWorkDone().then(release, release);
+    setTimeout(release, App.pacingTimeoutMs);
   }
 
   static hideSplash() {

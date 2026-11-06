@@ -7,7 +7,11 @@
     <title>GaussianSplattingDemo.Web</title>
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Barlow" />
-    <link rel="stylesheet" href="styles.css" />
+    <script type="text/javascript" src="gsplat_cache_manifest.js"></script>
+    <script type="text/javascript" src="gsplat_cache.js"></script>
+    <script type="text/javascript">
+        window.gSplatCache.loadStylesheet("styles", "styles.css");
+    </script>
     <script type="text/javascript" src="evergine.js"></script>
 </head>
 
@@ -31,12 +35,16 @@
     </div>
 
     <!-- First we load web assembly code -->
-    <script src="_framework/blazor.webassembly.js" autostart="false"></script>
+    <script type="text/javascript">
+        window.gSplatCache.loadScript("blazor", "_framework/blazor.webassembly.js", { autostart: "false" });
+    </script>
 
     <!-- Then, start loading the assets into the vfs -->
     <script src="assets.js"></script>
 
-    <script type="text/javascript" src="evergine_gaussiansplatting.js"></script>
+    <script type="text/javascript">
+        window.gSplatCache.loadScript("gaussiansplatting", "evergine_gaussiansplatting.js");
+    </script>
 
     <!-- Finally, run evergine -->
     <script type="text/javascript">
@@ -45,7 +53,11 @@
             "GaussianSplattingDemo.Web.Program",
             new EvergineModule()
         );
-        Blazor.start().then(function () {
+        Blazor.start({
+            loadBootResource: function (_type, _name, defaultUri) {
+                return window.gSplatCache.versionedUrl("blazor", defaultUri);
+            }
+        }).then(function () {
             // It is not mandatory to run Evergine now, but it must run after blazor is started
             app.startEvergine();
         });

@@ -333,3 +333,4 @@ EvergineContent.cs
 !**/Content/**/*.obj
 **/wwwroot/lib/
 **/wwwroot/evergine.js
+**/wwwroot/gsplat_cache_manifest.js
