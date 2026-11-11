@@ -27,14 +27,14 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Evergine.GaussianSplatting.Web" Version="2026.9.29.336-nightly" />
-    <PackageReference Include="Evergine.Framework" Version="2026.11.5.670-nightly" />
-    <PackageReference Include="Evergine.HLSLEverywhere" Version="2026.11.5.670-nightly" />
-    <PackageReference Include="Evergine.OpenGL" Version="2026.11.5.670-nightly" />
-    <PackageReference Include="Evergine.Serialization.Converters" Version="2026.11.5.670-nightly" />
-    <PackageReference Include="Evergine.Targets" Version="2026.11.5.670-nightly" />
-    <PackageReference Include="Evergine.Targets.Web" Version="2026.11.5.670-nightly" />
-    <PackageReference Include="Evergine.Web" Version="2026.11.5.670-nightly" />
+    <PackageReference Include="Evergine.GaussianSplatting.Web" Version="2026.11.11.6-preview" />
+    <PackageReference Include="Evergine.Framework" Version="2026.11.12.8" />
+    <PackageReference Include="Evergine.HLSLEverywhere" Version="2026.11.12.8" />
+    <PackageReference Include="Evergine.OpenGL" Version="2026.11.12.8" />
+    <PackageReference Include="Evergine.Serialization.Converters" Version="2026.11.12.8" />
+    <PackageReference Include="Evergine.Targets" Version="2026.11.12.8" />
+    <PackageReference Include="Evergine.Targets.Web" Version="2026.11.12.8" />
+    <PackageReference Include="Evergine.Web" Version="2026.11.12.8" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GaussianSplattingDemo\GaussianSplattingDemo.csproj" />
