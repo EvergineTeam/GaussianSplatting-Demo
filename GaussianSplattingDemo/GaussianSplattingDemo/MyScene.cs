@@ -13,7 +13,6 @@ namespace GaussianSplattingDemo
         {
             base.RegisterManagers();
             
-            this.Managers.AddManager(new global::Evergine.Bullet.BulletPhysicManager3D());
             
         }
 

@@ -7,7 +7,11 @@
       content="width=device-width, initial-scale=1.0, user-scalable=yes"
     />
     <title>GaussianSplattingDemo.WebGPU</title>
-    <link rel="stylesheet" href="styles.css" />
+    <script type="text/javascript" src="gsplat_cache_manifest.js"></script>
+    <script type="text/javascript" src="gsplat_cache.js"></script>
+    <script type="text/javascript">
+        window.gSplatCache.loadStylesheet("styles", "styles.css");
+    </script>
     <script type="text/javascript" src="evergine.js"></script>
   </head>
 
@@ -31,12 +35,16 @@
       </div>
 
       <!-- First we load web assembly code -->
-      <script src="_framework/blazor.webassembly.js" autostart="false"></script>
+      <script type="text/javascript">
+          window.gSplatCache.loadScript("blazor", "_framework/blazor.webassembly.js", { autostart: "false" });
+      </script>
 
       <!-- Then, start loading the assets into the vfs -->
       <script src="assets.js"></script>
 
-      <script type="text/javascript" src="evergine_gaussiansplatting.js"></script>
+      <script type="text/javascript">
+          window.gSplatCache.loadScript("gaussiansplatting", "evergine_gaussiansplatting.js");
+      </script>
 
       <!-- Finally, run evergine -->
       <script type="text/javascript">
@@ -45,31 +53,56 @@
               "GaussianSplattingDemo.WebGPU.Program",
               new EvergineModule()
           );
-          Blazor.start().then(async function () {
+          if (!navigator.gpu) {
+              alert("WebGPU is not supported on this browser. Please, use a compatible browser such as Chrome or Edge.");
+              App.hideSplash();
+          } else {
+              Blazor.start({
+                  loadBootResource: function (_type, _name, defaultUri) {
+                      return window.gSplatCache.versionedUrl("blazor", defaultUri);
+                  }
+              }).then(async function () {
 
-              // Set WebGPU device
-              const adapter = await navigator.gpu.requestAdapter();
-              const device = await adapter.requestDevice({
-                  requiredLimits: {
-                      maxStorageBuffersPerShaderStage: 10 // Request support for up to 10 storage buffers in a single shader stage
-                      // Add any other required limits here, for example: "maxTextureDimension2D", "maxComputeWorkgroupStorageSize", etc.
-                  },
-                  requiredFeatures: [
-                      // Add any required features here, for example: "primitive-index", "subgroup", etc.
-                      "depth32float-stencil8",
-                      "depth-clip-control"
-                  ]
+                  // Set WebGPU device
+                  const adapter = await navigator.gpu.requestAdapter();
+                  if (!adapter) {
+                      alert("WebGPU adapter could not be initialized. Please, check your browser and graphics settings.");
+                      App.hideSplash();
+                      return;
+                  }
+
+                  const device = await adapter.requestDevice({
+                      requiredLimits: {
+                          // Large splat scenes need the adapter's full buffer limits instead of the WebGPU defaults
+                          maxBufferSize: adapter.limits.maxBufferSize,
+                          maxStorageBuffersPerShaderStage: adapter.limits.maxStorageBuffersPerShaderStage,
+                          maxStorageBufferBindingSize: adapter.limits.maxStorageBufferBindingSize
+                      },
+                      requiredFeatures: [
+                          "depth32float-stencil8",
+                          "depth-clip-control"
+                      ]
+                  });
+
+                  // WebGPU validation errors are silent otherwise
+                  device.onuncapturederror = (event) => {
+                      console.error(`[WebGPU] ${event.error.constructor.name}: ${event.error.message}`);
+                  };
+
+                  device.lost.then((info) => {
+                      console.error(`[WebGPU] device lost (${info.reason}): ${info.message}`);
+                  });
+
+                  if (Blazor && Blazor.runtime && Blazor.runtime.Module) {
+                      Blazor.runtime.Module.preinitializedWebGPUDevice = device;
+                  } else {
+                      window.Module.preinitializedWebGPUDevice = device;
+                  }
+
+                  // It is not mandatory to run Evergine now, but it must run after blazor is started
+                  app.startEvergine();
               });
-
-              if (Blazor && Blazor.runtime && Blazor.runtime.Module) {
-                  Blazor.runtime.Module.preinitializedWebGPUDevice = device;
-              } else {
-                  window.Module.preinitializedWebGPUDevice = device;
-              }
-
-              // It is not mandatory to run Evergine now, but it must run after blazor is started
-              app.startEvergine();
-          });
+          }
 
           //// It is possible to delete the Evergine instance by running
           // app.destroyEvergine();

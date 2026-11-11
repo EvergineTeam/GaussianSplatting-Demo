@@ -108,7 +108,7 @@ namespace GaussianSplattingDemo.WebGPU
             };
             var swapChain = graphicsContext.CreateSwapChain(swapChainDescription);
             swapChain.VerticalSync = true;
-            swapChain.FrameBuffer.IntermediateBufferAssociated = false;
+            swapChain.FrameBuffer.IntermediateBufferAssociated = true;
 
             var graphicsPresenter = application.Container.Resolve<GraphicsPresenter>();
             var firstDisplay = new Display(surface, swapChain);

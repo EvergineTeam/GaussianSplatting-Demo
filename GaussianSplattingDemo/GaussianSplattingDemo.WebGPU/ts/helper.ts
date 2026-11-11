@@ -118,7 +118,19 @@ function _evergine_setRequestAnimationFrameCallback(
 ) {
     if (callbackName) {
         App.requestAnimationFrameCallback = function (d) {
+            // Skip the tick when the GPU is still busy with the frames already submitted.
+            // The loop keeps running, it just stops queueing more work. See App.maxFramesInFlight.
+            if (App.shouldSkipFrameForPacing()) {
+                if (App.requestAnimationFrameCallback) {
+                    window.requestAnimationFrame(App.requestAnimationFrameCallback);
+                }
+
+                return;
+            }
+
             targetInstance.invokeMethod(callbackName, d);
+            App.markFrameSubmitted();
+
             if (App.requestAnimationFrameCallback) {
                 window.requestAnimationFrame(App.requestAnimationFrameCallback);
             }
